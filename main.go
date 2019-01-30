@@ -17,7 +17,7 @@ var (
 
 func main() {
 	flag.Parse()
-	udpAddr, err := net.ResolveUDPAddr("UDP", *serverAddr)
+	udpAddr, err := net.ResolveUDPAddr("udp", *serverAddr)
 	if err != nil {
 		panic(err)
 	}
