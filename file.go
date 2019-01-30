@@ -60,12 +60,12 @@ func (tf *TftpFile) ReadBlock(n int64) ([]byte, error) {
 		tf.file.Close()
 		return nil, err
 	}
-	_, err = tf.file.Read(b)
+	rn, err := tf.file.Read(b)
 	if err != nil {
 		tf.file.Close()
 		return nil, err
 	}
-	return b, nil
+	return b[:rn], nil
 }
 
 func (tf *TftpFile) Close() error {

@@ -63,7 +63,7 @@ func (h *Server) Serve() error {
 		oack_options := make(map[string]interface{})
 		blksize, err := strconv.Atoi(rrq.Options["blksize"])
 		if err == nil {
-			oack_options["blksize"] = blksize
+			oack_options["blksize"] = int64(blksize)
 			h.blksize = int64(blksize)
 		}
 
@@ -95,7 +95,7 @@ func (h *Server) Serve() error {
 				return err
 			}
 			if ack.Block_num != 0 {
-				return fmt.Errorf("Ack is not 0")
+				return fmt.Errorf("Ack is not 0: %d", ack.Block_num)
 			}
 			return nil
 		}
@@ -108,13 +108,10 @@ func (h *Server) Serve() error {
 	}
 
 	h.tftpFile.SetBlockSize(h.blksize)
-
 	blockNum := int64(1)
 
 	for blockNum <= h.tftpFile.NumBlocks() {
-
 		blockStep := func() error {
-
 			b, err := h.getBlock(blockNum)
 			if err != nil {
 				return err
@@ -138,7 +135,6 @@ func (h *Server) Serve() error {
 		if err == nil {
 			blockNum++
 		}
-
 	}
 	return nil
 }

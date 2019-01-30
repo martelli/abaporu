@@ -9,7 +9,7 @@ import (
 )
 
 var (
-	serverPort = flag.Int("port", 69, "Set tftp server UDP port")
+	serverAddr = flag.String("listen", ":69", "Set tftp server to listen on UDP IP:Port")
 	rootDir    = flag.String("rootdir", "/tmp", "Set tftp root directory.")
 	timeout    = flag.Int("timeout", 5, "Packet transmission timeout.")
 	retries    = flag.Int("retries", 5, "Packet transmission retries.")
@@ -17,7 +17,11 @@ var (
 
 func main() {
 	flag.Parse()
-	conn, err := net.ListenUDP("udp", &net.UDPAddr{Port: *serverPort})
+	udpAddr, err := net.ResolveUDPAddr(serverAddr)
+	if err != nil {
+		panic(err)
+	}
+	conn, err := net.ListenUDP("udp", udpAddr)
 	if err != nil {
 		panic(err)
 	}

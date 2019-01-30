@@ -99,12 +99,12 @@ func (oack *OACK) Bytes() ([]byte, error) {
 				return nil, err
 			}
 		case int64:
-			_, err := buf.WriteString(fmt.Sprintf("%s", vtyped))
+			_, err := buf.WriteString(fmt.Sprintf("%d", vtyped))
 			if err != nil {
 				return nil, err
 			}
 		default:
-			return nil, errors.New(fmt.Sprintf("Unrecognized type for %v", v))
+			return nil, errors.New(fmt.Sprintf("Unrecognized type for %v [%T]", v, v))
 		}
 		buf.WriteByte(0x00)
 	}
