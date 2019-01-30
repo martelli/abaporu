@@ -1,9 +1,11 @@
 package main
 
-import "os"
-import "fmt"
-import "io"
-import "path"
+import (
+	"fmt"
+	"io"
+	"os"
+	"path"
+)
 
 type TftpFile struct {
 	file      *os.File

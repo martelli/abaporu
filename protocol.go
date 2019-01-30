@@ -2,10 +2,9 @@ package main
 
 import (
 	"bytes"
+	"encoding/binary"
 	"errors"
 	"fmt"
-
-	"encoding/binary"
 )
 
 func GetOpcode(raw []byte) (int64, error) {
