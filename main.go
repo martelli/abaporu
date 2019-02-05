@@ -27,6 +27,7 @@ func main() {
 	}
 
 	fmt.Printf("Server started with root: %s\n", *rootDir)
+	fmt.Printf("Listening on port: %s\n", *serverAddr)
 
 	mainBuffer := make([]byte, 2048)
 
